@@ -18,7 +18,7 @@ return fetch(URL).then((res) => res.json());
 
 // 3. DELETE - видаляємо тудушку при натискані на хрестик
 function deleteTask(id) {
-fetch(${URL}/${id}, {
+return fetch(${URL}/${id}, {
   method: "DELETE",
 });
 }
