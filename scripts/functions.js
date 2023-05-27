@@ -1,5 +1,5 @@
 import refs from "./refs.js";
-import { load, save } from "./storage.js";
+// import { load, save } from "./storage.js";
 
 const STORAGE_KEY = "tasks";
 let currentID = 1;
@@ -39,23 +39,23 @@ function createLi({ text, isDone = false, id = currentID }) {
 }
 
 function handleTaskBehaviour({ target }) {
-  const currentState = load(STORAGE_KEY);
+  // const currentState = load(STORAGE_KEY);
 
-  if (target.nodeName === "LI") {
-    target.classList.toggle("checked");
-    const taskObj = currentState.find(
-      (task) => Number(task.id) === Number(target.dataset.id)
-    );
-    taskObj.isDone = !taskObj.isDone;
-  } else if (target.classList.contains("close")) {
-    target.parentNode.remove();
-    const taskIndex = currentState.findIndex(
-      (task) => Number(task.id) === Number(target.parentNode.dataset.id)
-    );
-    currentState.splice(taskIndex, 1);
-  }
+  // if (target.nodeName === "LI") {
+  //   target.classList.toggle("checked");
+  //   const taskObj = currentState.find(
+  //     (task) => Number(task.id) === Number(target.dataset.id)
+  //   );
+  //   taskObj.isDone = !taskObj.isDone;
+  // } else if (target.classList.contains("close")) {
+  //   target.parentNode.remove();
+  //   const taskIndex = currentState.findIndex(
+  //     (task) => Number(task.id) === Number(target.parentNode.dataset.id)
+  //   );
+  //   currentState.splice(taskIndex, 1);
+  // }
 
-  save(STORAGE_KEY, currentState);
+  // save(STORAGE_KEY, currentState);
 }
 
 function createTaskObject({ text, isDone = false }) {
@@ -67,18 +67,18 @@ function createTaskObject({ text, isDone = false }) {
 }
 
 function addTaskToStorage(text) {
-  const currentState = load(STORAGE_KEY);
-  if (currentState === undefined) {
-    save(STORAGE_KEY, [createTaskObject({ text })]);
-  } else {
-    currentState.push(createTaskObject({ text }));
-    save(STORAGE_KEY, currentState);
-  }
+  // const currentState = load(STORAGE_KEY);
+  // if (currentState === undefined) {
+  //   save(STORAGE_KEY, [createTaskObject({ text })]);
+  // } else {
+  //   currentState.push(createTaskObject({ text }));
+  //   save(STORAGE_KEY, currentState);
+  // }
   currentID += 1;
 }
 
 function fillTasksList() {
-  const currentState = load(STORAGE_KEY);
+  // const currentState = load(STORAGE_KEY);
   if (currentState !== undefined) {
     currentState.forEach(createLi);
     currentID =
