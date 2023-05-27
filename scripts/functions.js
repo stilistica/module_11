@@ -26,7 +26,9 @@ function addNewTask() {
     text: value,
   });
 
-  createTask({ text: value }).then((data) => console.log(data));
+  createTask({ text: value })
+then((res) => res.json())
+.then((task) => createLi(task));
   clearInput();
 }
 
