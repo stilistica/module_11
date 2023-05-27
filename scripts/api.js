@@ -35,5 +35,5 @@ method: "PUT",
 });
 }
 
-export { createTask, getTask, updateTask, deleteTask };
+export { createTask, getTasks, updateTask, deleteTask };
 
