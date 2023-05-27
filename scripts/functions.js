@@ -64,7 +64,7 @@ function fillTasksList() {
 }
 
 function onError(error) {
-alert("Error: " + error);
+alert("Error: " + error.response.statusText);
 }
 
 export { addNewTask, handleTaskBehaviour, fillTasksList };
