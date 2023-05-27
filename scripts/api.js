@@ -2,7 +2,7 @@ const URL = "https://6471c75e6a9370d5a41aab5c.mockapi.io/api/todos";
 
 // 1. POST - створення нового ресурсу(об'єкт тудушки), після натискання на кнопку
 function createTask(value) {
-fetch(URL. {
+return fetch(URL. {
       method: "POST",
       body: JSON.srtringify(value),
   headers: {
