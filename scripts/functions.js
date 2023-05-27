@@ -24,7 +24,8 @@ function addNewTask() {
   createTask({ text: value })
 .then(({ data }) => data)
 //   .then((res) => res.json()) //fetch
-.then(createLi);
+.then(createLi)
+  .catch(onError);;
   clearInput();
 }
 
@@ -47,7 +48,8 @@ function handleTaskBehaviour({ target }) {
     .then(({ data }) => {
       target.parentNode.remove();
       return data;
-    });
+    })
+    .catch(onError);;
 //       .then((res) => {
 //       target.parentNode.remove();
 //       return res.json();
@@ -57,8 +59,12 @@ function handleTaskBehaviour({ target }) {
 
 
 function fillTasksList() {
-  getTasks().then(tasks => tasks.forEach(createLi));
+  getTasks().then(tasks => tasks.forEach(createLi))
+  .catch(onError);
+}
 
+function onError(error) {
+alert("Error: " + error);
 }
 
 export { addNewTask, handleTaskBehaviour, fillTasksList };
