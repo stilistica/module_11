@@ -22,7 +22,7 @@ function addNewTask() {
   }
 
   createTask({ text: value })
-then((res) => res.json())
+// .then((res) => res.json())
 .then(createLi);
   clearInput();
 }
