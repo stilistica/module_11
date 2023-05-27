@@ -28,7 +28,7 @@ function deleteTask(id) {
 
 
 // 4. PUT - змынювати статус isDone при натисканні та тудушку
-function updateTsk(id, status) {
+function updateTask(id, status) {
 //  return fetch(${URL}/${id}, {
 // method: "PUT",
 //   body: JSON.stringify({ isDone: status }),
