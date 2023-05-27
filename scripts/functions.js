@@ -1,9 +1,7 @@
 import refs from "./refs.js";
 // import { load, save } from "./storage.js";
-import { createTask, getTask, updateTask, deleteTask } from "./api.js";
+import { createTask, getTasks, updateTask, deleteTask } from "./api.js";
 
-const STORAGE_KEY = "tasks";
-let currentID = 1;
 
 function addCloseButton(target) {
   const span = document.createElement("span");
@@ -22,17 +20,14 @@ function addNewTask() {
     clearInput();
     return;
   }
-  createLi({
-    text: value,
-  });
 
   createTask({ text: value })
 then((res) => res.json())
-.then((task) => createLi(task));
+.then(createLi);
   clearInput();
 }
 
-function createLi({ text, isDone = false, id = currentID }) {
+function createLi({ text, isDone, id }) {
   const liEl = document.createElement("li");
   liEl.textContent = text;
   liEl.dataset.id = id;
@@ -42,43 +37,23 @@ function createLi({ text, isDone = false, id = currentID }) {
 }
 
 function handleTaskBehaviour({ target }) {
-  // const currentState = load(STORAGE_KEY);
-
-  // if (target.nodeName === "LI") {
-  //   target.classList.toggle("checked");
-  //   const taskObj = currentState.find(
-  //     (task) => Number(task.id) === Number(target.dataset.id)
-  //   );
-  //   taskObj.isDone = !taskObj.isDone;
-  // } else if (target.classList.contains("close")) {
-  //   target.parentNode.remove();
-  //   const taskIndex = currentState.findIndex(
-  //     (task) => Number(task.id) === Number(target.parentNode.dataset.id)
-  //   );
-  //   currentState.splice(taskIndex, 1);
-  // }
-
-  // save(STORAGE_KEY, currentState);
-}
-
-function createTaskObject({ text, isDone = false }) {
-  return {
-    text,
-    isDone,
-    id: currentID,
-  };
+  if (target.nodeName === "LI") {
+    target.classList.toggle("checked");
+    updateTask(target.dataset.id, target.classList.contains("checked")); 
+  } else if (target.classList.contains("close")) {
+    target.parentNode.remove();
+    deleteTask(target.parentNode.dataset.id)
+      .then((res) => {
+      target.parentNode.remove();
+      return res.json();
+    });
+  }
 }
 
 
 function fillTasksList() {
-  // const currentState = load(STORAGE_KEY);
-//   if (currentState !== undefined) {
-//     currentState.forEach(createLi);
-//     currentID =
-//       currentState.length === 0
-//         ? 1
-//         : currentState[currentState.length - 1].id + 1;
-//   }
+  getTasks().then(tasks => tasks.forEach(createLi));
+
 }
 
 export { addNewTask, handleTaskBehaviour, fillTasksList };
