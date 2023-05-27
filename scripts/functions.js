@@ -1,6 +1,6 @@
 import refs from "./refs.js";
 // import { load, save } from "./storage.js";
-
+import { createTask, getTask, updateTask, deleteTask } from "./api.js";
 
 const STORAGE_KEY = "tasks";
 let currentID = 1;
@@ -26,7 +26,7 @@ function addNewTask() {
     text: value,
   });
 
-  addTaskToStorage(value);
+  addTaskToDB(value);
   clearInput();
 }
 
@@ -67,7 +67,9 @@ function createTaskObject({ text, isDone = false }) {
   };
 }
 
-function addTaskToStorage(text) {
+function addTaskToDB(text) {
+  createTask({ text });
+  
   // const currentState = load(STORAGE_KEY);
   // if (currentState === undefined) {
   //   save(STORAGE_KEY, [createTaskObject({ text })]);
@@ -80,13 +82,13 @@ function addTaskToStorage(text) {
 
 function fillTasksList() {
   // const currentState = load(STORAGE_KEY);
-  if (currentState !== undefined) {
-    currentState.forEach(createLi);
-    currentID =
-      currentState.length === 0
-        ? 1
-        : currentState[currentState.length - 1].id + 1;
-  }
+//   if (currentState !== undefined) {
+//     currentState.forEach(createLi);
+//     currentID =
+//       currentState.length === 0
+//         ? 1
+//         : currentState[currentState.length - 1].id + 1;
+//   }
 }
 
 export { addNewTask, handleTaskBehaviour, fillTasksList };
