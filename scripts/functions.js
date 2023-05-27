@@ -26,7 +26,7 @@ function addNewTask() {
     text: value,
   });
 
-  addTaskToDB(value);
+  createTask({ text: value }).then((data) => console.log(data));
   clearInput();
 }
 
@@ -67,18 +67,6 @@ function createTaskObject({ text, isDone = false }) {
   };
 }
 
-function addTaskToDB(text) {
-  createTask({ text });
-  
-  // const currentState = load(STORAGE_KEY);
-  // if (currentState === undefined) {
-  //   save(STORAGE_KEY, [createTaskObject({ text })]);
-  // } else {
-  //   currentState.push(createTaskObject({ text }));
-  //   save(STORAGE_KEY, currentState);
-  // }
-  currentID += 1;
-}
 
 function fillTasksList() {
   // const currentState = load(STORAGE_KEY);
