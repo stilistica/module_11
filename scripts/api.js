@@ -26,7 +26,7 @@ return fetch(${URL}/${id}, {
 
 // 4. PUT - змынювати статус isDone при натисканні та тудушку
 function updateTsk(id, status) {
-  fetch(${URL}/${id}, {
+ return fetch(${URL}/${id}, {
 method: "PUT",
   body: JSON.stringify({ isDone: status }),
     headers: {
