@@ -23,6 +23,7 @@ function addNewTask() {
 
   createTask({ text: value })
 .then(({ data }) => data)
+//   .then((res) => res.json()) //fetch
 .then(createLi);
   clearInput();
 }
@@ -43,10 +44,14 @@ function handleTaskBehaviour({ target }) {
   } else if (target.classList.contains("close")) {
     target.parentNode.remove();
     deleteTask(target.parentNode.dataset.id)
-      .then((res) => {
+    .then(({ data }) => {
       target.parentNode.remove();
-      return res.json();
+      return data;
     });
+//       .then((res) => {
+//       target.parentNode.remove();
+//       return res.json();
+//     }); //fetch
   }
 }
 
